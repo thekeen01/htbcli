@@ -13,7 +13,8 @@ There aren't a lot of commands available but see below the examples of the comma
 
 this allows you to list all seasonal machines in the current season
 
-```python3 htbcli.py list
+```
+python3 htbcli.py list
 
 Name                 id     os                  
 ----------------------------------------------
@@ -30,7 +31,8 @@ Giveback             796    Linux
 
 this allows to launch a machine. It will wait until it gets a valid ip address before returning it
 
-```python3 htbcli.py start --machine Giveback
+```
+python3 htbcli.py start --machine Giveback
 
 Found machine 'Giveback' with ID 796.
 Do you want to start 'Giveback'? (y/n): y
@@ -44,7 +46,8 @@ Final machine IP: 10.129.127.168
 
 this allows to terminate a machine
 
-```python3 htbcli.py stop --machine Giveback
+```
+python3 htbcli.py stop --machine Giveback
 
 Machine 796 stop request sent successfully.
 ```
@@ -53,6 +56,7 @@ Machine 796 stop request sent successfully.
 
 this allows to submit a flag for the current running machine
 
-```python3 htbcli.py flag --submit_flag flag
+```
+python3 htbcli.py flag --submit_flag flag
 
 ```
