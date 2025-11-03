@@ -13,6 +13,7 @@ API_URL_START_VM = f"{BASE}/api/v4/vm/spawn"
 API_URL_STOP_VM = f"{BASE}/api/v4/vm/terminate"
 API_URL_ACTIVE_MACHINE = f"{BASE}/api/v4/machine/profile"
 API_URL_LIST_MACHINES = f"{BASE}/api/v4/season/machines"
+API_URL_INFO_MACHINE = f"{BASE}/api/v4/machine/profile"
 API_URL_SUBMIT_FLAG = f"{BASE}/api/v5/machine/own"
 
 DEFAULT_TIMEOUT = 10  # seconds for HTTP requests
@@ -195,6 +196,16 @@ def flag_command(flag, token):
         print(f"[submit_flag] Request error: {e}")
     return None
 
+def info_command(machine, token):
+    """Fetch the list of seasons from the HackTheBox API."""
+    htb_headers = {"Authorization": f"Bearer {token}","User-Agent": "xxx/1.0","Accept": "application/json",}
+    response = requests.get(API_URL_INFO_MACHINE + '/' + machine, headers=htb_headers)
+    response.raise_for_status()  # Raises an error if the request fails
+    data = response.json()
+    info_status = data.get("info", {}).get("info_status")
+    print("Description:", info_status)
+    return None
+
 if __name__ == "__main__":
     # get token
     TOKEN = os.getenv("HTB_API_TOKEN")
@@ -223,6 +234,10 @@ if __name__ == "__main__":
     parser_flag = subparsers.add_parser("flag", help="Submit a flag")
     parser_flag.add_argument("--submit_flag", required=True, help="Flag value to submit")
 
+    # info command
+    parser_start = subparsers.add_parser("info", help="info about a machine")
+    parser_start.add_argument("--machine", required=True, help="Machine name")
+
     args = parser.parse_args()
 
     # Command dispatcher
@@ -234,6 +249,8 @@ if __name__ == "__main__":
         stop_command(args.machine, TOKEN)
     elif args.command == "flag":
         flag_command(args.submit_flag, TOKEN)
+    elif args.command == "info":
+        info_command(args.machine, TOKEN)
     else:
         parser.print_help()
         sys.exit(1)

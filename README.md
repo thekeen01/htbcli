@@ -27,6 +27,16 @@ Conversor            787    Linux
 Giveback             796    Linux      
 ```
 
+# info
+
+this allows you to get the description of the machine which is helpful when they give you creds for assumed breach scenarios
+
+```
+python3 htbcli.py info --machine DarkZero
+
+Description: As is common in real life pentests, you will start the DarkZero box with credentials for the following account john.w / RFulUtONCOL!
+```
+
 # start
 
 this allows to launch a machine. It will wait until it gets a valid ip address before returning it
