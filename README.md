@@ -2,7 +2,7 @@
 Simple cli to interact with HTB seasonal boxes
 
 # requirements
-Before starting, you need to generate an API token on HTB to be able to use the cli. Simply go to My profile -> profile settings and create an app token. Then ensure that the env variabl HTB_API_TOKEN contains your token and the setup will be complete
+Before starting, you need to generate an API token on HTB to be able to use the cli. Simply go to My profile -> profile settings and create an app token. Then ensure that the env variable HTB_API_TOKEN contains your token and the setup will be complete
 
 export HTB_API_TOKEN=eyJ...
 
