@@ -14,8 +14,8 @@ API_URL_STOP_VM = f"{BASE}/api/v4/vm/terminate"
 API_URL_ACTIVE_MACHINE = f"{BASE}/api/v4/machine/profile"
 API_URL_LIST_MACHINES = f"{BASE}/api/v4/season/machines"
 API_URL_INFO_MACHINE = f"{BASE}/api/v4/machine/profile"
-#API_URL_SUBMIT_FLAG = f"{BASE}/api/v5/machine/own"
-API_URL_SUBMIT_FLAG = f"{BASE}/api/v4/arena/own"
+API_URL_SUBMIT_FLAG = f"{BASE}/api/v5/machine/own"
+#API_URL_SUBMIT_FLAG = f"{BASE}/api/v4/arena/own"
 
 DEFAULT_TIMEOUT = 10  # seconds for HTTP requests
 POLL_INTERVAL = 10    # seconds between active checks
