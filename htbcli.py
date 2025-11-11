@@ -4,7 +4,6 @@ import requests
 import argparse
 import sys
 import json
-from prettytable import PrettyTable
 
 BASE = "https://labs.hackthebox.com"
 #BASE = "http://127.0.0.1:4444"
