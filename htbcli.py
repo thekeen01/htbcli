@@ -140,7 +140,7 @@ def wait_for_machine_ip(api_url, token, machine_id, poll_interval=POLL_INTERVAL,
 
 def start_command(machine_name, TOKEN):
 
-    machine_id = get_machine_id_by_name(API_URL_MACHINES, machine_name, TOKEN)
+    machine_id = get_machine_id_by_profile(machine_name, TOKEN)
     if machine_id is None:
         exit(1)
 
@@ -162,7 +162,7 @@ def start_command(machine_name, TOKEN):
         print("Failed to obtain machine IP.")
 
 def stop_command(machine_name, TOKEN):
-    machine_id = get_machine_id_by_name(API_URL_MACHINES, machine_name, TOKEN)
+    machine_id = get_machine_id_by_profile(machine_name, TOKEN)
     if machine_id is None:
         exit(1)
 
@@ -205,6 +205,32 @@ def info_command(machine, token):
     info_status = data.get("info", {}).get("info_status")
     print("Description:", info_status)
     return None
+
+def get_machine_id_by_profile(machine_name, token, timeout=DEFAULT_TIMEOUT):
+    """
+    Resolve a machine's ID using the /machine/profile/<name> endpoint.
+    Works for active + retired machines (e.g. Puppy).
+    """
+    htb_headers = {
+        "Authorization": f"Bearer {token}",
+        "User-Agent": "xxx/1.0",
+        "Accept": "application/json",
+    }
+    try:
+        resp = requests.get(f"{API_URL_INFO_MACHINE}/{machine_name}", headers=htb_headers, timeout=timeout)
+        resp.raise_for_status()
+        data = resp.json()
+        info = data.get("info")
+        if not info:
+            print(f"Machine '{machine_name}' not found (no 'info' in profile).")
+            return None
+        return info.get("id")
+    except requests.exceptions.RequestException as e:
+        print(f"[get_machine_id_by_profile] Request error: {e}")
+        return None
+    except ValueError:
+        print("[get_machine_id_by_profile] Failed to parse JSON.")
+        return None
 
 if __name__ == "__main__":
     # get token
