@@ -1,5 +1,5 @@
 # htbcli
-Simple cli to interact with HTB seasonal boxes
+Simple cli to interact with HTB seasonal boxes mainly. You can now start and stop retired machines thanks to a commit from b5null.
 
 # requirements
 Before starting, you need to generate an API token on HTB to be able to use the cli. Simply go to My profile -> profile settings and create an app token. Then ensure that the env variable HTB_API_TOKEN contains your token and the setup will be complete
