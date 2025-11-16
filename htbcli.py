@@ -29,16 +29,16 @@ def fetch_machines(token):
 
 def print_season_table(data):
     """Print a formatted table of season info."""
-    table_data = [(item["id"], item["name"], item["os"]) for item in data["data"] if not item.get("unknown")]
+    table_data = [(item["id"], item["name"], item["os"], item["difficulty_text"]) for item in data["data"] if not item.get("unknown")]
 
     #print(tabulate(table_data, headers=["name", "id", "os"], tablefmt="grid"))
 
-    print(f"{'Name':<20} {'id':<6} {'os':<20}")
-    print("-" * 46)
+    print(f"{'Name':<20} {'id':<6} {'os':<20} {'difficulty':<20}")
+    print("-" * 66)
 
     # Print rows
-    for id, name, os in table_data:
-        print(f"{name:<20} {id:<6} {os:<20}")
+    for id, name, os, difficulty_text in table_data:
+        print(f"{name:<20} {id:<6} {os:<20} {difficulty_text:<20}")
 
 def get_machine_id_by_name(api_url, machine_name, token, timeout=DEFAULT_TIMEOUT):
     """Fetch machines and return the ID for the given machine_name (case-insensitive)."""
