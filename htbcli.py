@@ -7,11 +7,11 @@ import json
 
 BASE = "https://labs.hackthebox.com"
 #BASE = "http://127.0.0.1:4444"
-API_URL_MACHINES = f"{BASE}/api/v4/season/machines"
 API_URL_START_VM = f"{BASE}/api/v4/vm/spawn"
 API_URL_STOP_VM = f"{BASE}/api/v4/vm/terminate"
 API_URL_ACTIVE_MACHINE = f"{BASE}/api/v4/machine/profile"
-API_URL_LIST_MACHINES = f"{BASE}/api/v4/season/machines"
+API_URL_LIST_MACHINES = f"{BASE}/api/v5/machines?per_page=30&state=active&sort_by=release_date&sort_type=asc"
+#API_URL_LIST_MACHINES = f"{BASE}/api/v4/season/machines"
 API_URL_INFO_MACHINE = f"{BASE}/api/v4/machine/profile"
 API_URL_SUBMIT_FLAG = f"{BASE}/api/v5/machine/own"
 #API_URL_SUBMIT_FLAG = f"{BASE}/api/v4/arena/own"
@@ -29,9 +29,7 @@ def fetch_machines(token):
 
 def print_season_table(data):
     """Print a formatted table of season info."""
-    table_data = [(item["id"], item["name"], item["os"], item["difficulty_text"]) for item in data["data"] if not item.get("unknown")]
-
-    #print(tabulate(table_data, headers=["name", "id", "os"], tablefmt="grid"))
+    table_data = [(item["id"], item["name"], item["os"], item["difficultyText"]) for item in data["data"] if not item.get("unknown")]
 
     print(f"{'Name':<20} {'id':<6} {'os':<20} {'difficulty':<20}")
     print("-" * 66)
